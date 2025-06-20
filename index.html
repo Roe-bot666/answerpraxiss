@@ -3,21 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <title>Daily Yes/No Question</title>
-
   <!-- Font imports -->
   <link href="https://fonts.googleapis.com/css2?family=Lexend&family=Quicksand:wght@400;600&family=Creepster&family=Nosifer&family=Butcherman&display=swap" rel="stylesheet">
-
   <style>
     @keyframes slideInLeft {
       from { transform: translateX(-100%); opacity: 0; }
       to   { transform: translateX(0); opacity: 1; }
     }
-
     @keyframes slideInRight {
       from { transform: translateX(100%); opacity: 0; }
       to   { transform: translateX(0); opacity: 1; }
     }
-
     body {
       background: #000000;
       color: #b7052a;
@@ -28,7 +24,6 @@
       height: 100vh;
       margin: 0;
     }
-
     .container {
       background: #000000;
       padding: 30px;
@@ -37,12 +32,10 @@
       text-align: center;
       box-shadow: 0 0 30px rgba(255, 0, 100, 0.2);
     }
-
     h2 {
       font-size: 1.4rem;
       margin-bottom: 20px;
     }
-
     button {
       padding: 12px 24px;
       margin: 10px;
@@ -54,48 +47,39 @@
       color: black;
       transition: background 0.3s ease;
     }
-
     button:hover {
       background-color: #ff3380;
       color: white;
     }
-
     .response {
       margin-top: 30px;
       font-size: 3rem;
       font-weight: 600;
       display: none;
     }
-
     #yesResponse {
       font-family: 'Quicksand', sans-serif;
       color: #0090ff;
     }
-
     #noResponse {
       font-family: 'Creepster', 'Nosifer', 'Butcherman', cursive;
       color: #00c851;
     }
-
     .hidden {
       display: none;
     }
-
     .show {
       display: block;
     }
-
     .animate-yes {
       animation: slideInLeft 0.5s ease forwards;
     }
-
     .animate-no {
       animation: slideInRight 0.5s ease forwards;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
     <h2 id="question">Loading question...</h2>
     <button id="yesBtn">Yes</button>
@@ -103,12 +87,16 @@
     <p id="yesResponse" class="response hidden"></p>
     <p id="noResponse" class="response hidden"></p>
   </div>
-
   <script>
     const qaList = [
-      { question: "Whats up bitch it's Monday did we do the thing?", yesResponse: "You moved. You resisted entropy. Even the grave applauds. Every second you fought gravity today buys you time before it drags you under for good.", noResponse: "You skipped again? Beta, your fascia is stiffer than your resolve. Keep this up and you’ll need a crowbar to unglue your ass from that chair." },
-      { question: "Day 2 tuesday did we do the thing?", yesResponse: "You resisted resistance. That’s rare. Now let’s see if you can resist the fridge after 9 p.m. too — or is that asking too much genius?", noResponse: "Your mat waited. Your mat wept. Your mat wonders why you bought it if you’re just decorating the floor." }
-      // ... (Add the rest of your 28 questions here)
+      { question: "Day 1: Did we do the thing?", yesResponse: "You moved. You resisted entropy. Even the grave applauds.", noResponse: "You skipped again? Your fascia is stiffer than your resolve." },
+      { question: "Day 2: Did we do the thing?", yesResponse: "You resisted resistance. Rare stuff.", noResponse: "Your mat wept. You just decorate the floor with it." },
+      { question: "Day 3: Did we do the thing?", yesResponse: "That's 10 years your joints will thank you for.", noResponse: "You avoided discomfort. The spine will retaliate." },
+      { question: "Day 4: Did we do the thing?", yesResponse: "You didn’t flake. That's a rep that builds more than muscle.", noResponse: "Skipped again? Skip life while you're at it." },
+      { question: "Day 5: Did we do the thing?", yesResponse: "Discipline isn’t sexy. It’s rare. You chose rare.", noResponse: "Even the cockroaches are judging you." },
+      { question: "Day 6: Did we do the thing?", yesResponse: "You kept your promise to your future self.", noResponse: "Lazy glutes = sad jeans. Enjoy the sag." },
+      { question: "Day 7: Did we do the thing?", yesResponse: "30 more than zero. Zero is what most give.", noResponse: "Zero effort = zero progress. No shock there." },
+      // Add remaining days...
     ];
 
     function getQuestionIndex() {
@@ -143,6 +131,5 @@
       yesEl.classList.add('hidden');
     };
   </script>
-
 </body>
 </html>
