@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <title>Daily Yes/No Question</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Font imports -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend&family=Quicksand:wght@400;600&family=Creepster&family=Nosifer&family=Butcherman&display=swap" rel="stylesheet">
 
   <style>
     @keyframes slideInLeft {
@@ -34,7 +33,7 @@
       background: #000000;
       padding: 30px;
       border-radius: 12px;
-      max-width: 600px;
+      max-width: 500px;
       text-align: center;
       box-shadow: 0 0 30px rgba(255, 0, 100, 0.2);
     }
@@ -57,4 +56,93 @@
     }
 
     button:hover {
-      background-color
+      background-color: #ff3380;
+      color: white;
+    }
+
+    .response {
+      margin-top: 30px;
+      font-size: 3rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    #yesResponse {
+      font-family: 'Quicksand', sans-serif;
+      color: #0090ff;
+    }
+
+    #noResponse {
+      font-family: 'Creepster', 'Nosifer', 'Butcherman', cursive;
+      color: #00c851;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .show {
+      display: block;
+    }
+
+    .animate-yes {
+      animation: slideInLeft 0.5s ease forwards;
+    }
+
+    .animate-no {
+      animation: slideInRight 0.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2 id="question">Loading question...</h2>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+    <p id="yesResponse" class="response hidden"></p>
+    <p id="noResponse" class="response hidden"></p>
+  </div>
+
+  <script>
+    const qaList = [
+      { question: "Whats up bitch it's Monday did we do the thing?", yesResponse: "You moved. You resisted entropy. Even the grave applauds. Every second you fought gravity today buys you time before it drags you under for good.", noResponse: "You skipped again? Beta, your fascia is stiffer than your resolve. Keep this up and you’ll need a crowbar to unglue your ass from that chair." },
+      { question: "Day 2 tuesday did we do the thing?", yesResponse: "You resisted resistance. That’s rare. Now let’s see if you can resist the fridge after 9 p.m. too — or is that asking too much genius?", noResponse: "Your mat waited. Your mat wept. Your mat wonders why you bought it if you’re just decorating the floor." }
+      // ... (Add the rest of your 28 questions here)
+    ];
+
+    function getQuestionIndex() {
+      const startDate = new Date('2025-06-19');
+      const today = new Date();
+      const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+      return diffDays % qaList.length;
+    }
+
+    const index = getQuestionIndex();
+    const currentQA = qaList[index];
+    const yesEl = document.getElementById('yesResponse');
+    const noEl = document.getElementById('noResponse');
+
+    document.getElementById('question').textContent = currentQA.question;
+
+    document.getElementById('yesBtn').onclick = () => {
+      yesEl.textContent = currentQA.yesResponse;
+      yesEl.classList.remove('show', 'animate-yes', 'hidden');
+      void yesEl.offsetWidth;
+      yesEl.classList.add('show', 'animate-yes');
+      noEl.classList.remove('show');
+      noEl.classList.add('hidden');
+    };
+
+    document.getElementById('noBtn').onclick = () => {
+      noEl.textContent = currentQA.noResponse;
+      noEl.classList.remove('show', 'animate-no', 'hidden');
+      void noEl.offsetWidth;
+      noEl.classList.add('show', 'animate-no');
+      yesEl.classList.remove('show');
+      yesEl.classList.add('hidden');
+    };
+  </script>
+
+</body>
+</html>
