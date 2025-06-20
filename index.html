@@ -3,7 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <title>Daily Yes/No Question</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
   <style>
+    @keyframes slideInLeft {
+      from { transform: translateX(-100%); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+
     body {
       background: #000000;
       color: #b7052a;
@@ -12,7 +23,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 5;
+      margin: 0;
     }
 
     .container {
@@ -37,54 +48,44 @@
       border-radius: 6px;
       cursor: pointer;
       background-color: #ffffff;
-      color: white;
+      color: black;
       transition: background 0.3s ease;
     }
 
     button:hover {
       background-color: #ff3380;
+      color: white;
     }
 
- const yesEl = document.getElementById('yesResponse');
-const noEl = document.getElementById('noResponse');
+    .response {
+      margin-top: 30px;
+      font-size: 3rem;
+      font-weight: 600;
+      display: none;
+    }
 
-document.getElementById('yesBtn').onclick = () => {
-  yesEl.textContent = currentQA.yesResponse;
-  yesEl.classList.remove('show', 'animate-yes');
-  void yesEl.offsetWidth; // force reflow
-  yesEl.classList.add('show', 'animate-yes');
-  noEl.classList.remove('show');
-};
+    #yesResponse {
+      color: #0090ff;
+    }
 
-document.getElementById('noBtn').onclick = () => {
-  noEl.textContent = currentQA.noResponse;
-  noEl.classList.remove('show', 'animate-no');
-  void noEl.offsetWidth;
-  noEl.classList.add('show', 'animate-no');
-  yesEl.classList.remove('show');
-};
+    #noResponse {
+      color: #00c851;
+    }
 
-.response {
-  margin-top: 30px;
-  font-size: 3rem;
-  font-weight: 600;
-  display: none;
-}
+    .hidden {
+      display: none;
+    }
 
-#yesResponse {
-  color: ##0090ff;
-}
+    .show {
+      display: block;
+    }
 
-#noResponse {
-  color: #00c851;
-}
+    .animate-yes {
+      animation: slideInLeft 0.5s ease forwards;
+    }
 
-.hidden {
-  display: none;
-}
-
-.show {
-  display: block;
+    .animate-no {
+      animation: slideInRight 0.5s ease forwards;
     }
   </style>
 </head>
@@ -94,14 +95,15 @@ document.getElementById('noBtn').onclick = () => {
     <h2 id="question">Loading question...</h2>
     <button id="yesBtn">Yes</button>
     <button id="noBtn">No</button>
-    <p id="response"></p>
+    <p id="yesResponse" class="response hidden"></p>
+    <p id="noResponse" class="response hidden"></p>
   </div>
 
   <script>
-    const qaList = [/* Your 28-day block from earlier goes here */];
+    const qaList = [/* your 28-day data block goes here */];
 
     function getQuestionIndex() {
-      const startDate = new Date('2025-06-19'); // Your custom cycle start
+      const startDate = new Date('2025-06-19');
       const today = new Date();
       const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
       return diffDays % qaList.length;
@@ -109,15 +111,29 @@ document.getElementById('noBtn').onclick = () => {
 
     const index = getQuestionIndex();
     const currentQA = qaList[index];
+    const yesEl = document.getElementById('yesResponse');
+    const noEl = document.getElementById('noResponse');
 
     document.getElementById('question').textContent = currentQA.question;
 
     document.getElementById('yesBtn').onclick = () => {
-      document.getElementById('response').textContent = currentQA.yesResponse;
+      yesEl.textContent = currentQA.yesResponse;
+      yesEl.classList.remove('show', 'animate-yes');
+      void yesEl.offsetWidth;
+      yesEl.classList.remove('hidden');
+      yesEl.classList.add('show', 'animate-yes');
+      noEl.classList.remove('show');
+      noEl.classList.add('hidden');
     };
 
     document.getElementById('noBtn').onclick = () => {
-      document.getElementById('response').textContent = currentQA.noResponse;
+      noEl.textContent = currentQA.noResponse;
+      noEl.classList.remove('show', 'animate-no');
+      void noEl.offsetWidth;
+      noEl.classList.remove('hidden');
+      noEl.classList.add('show', 'animate-no');
+      yesEl.classList.remove('show');
+      yesEl.classList.add('hidden');
     };
   </script>
 
