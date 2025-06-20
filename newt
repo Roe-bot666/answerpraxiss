@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Daily Yes/No Question</title>
+  <style>
+    body {
+      background: #000000;
+      color: #b7052a;
+      font-family: 'Lexend', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 5;
+    }
+
+    .container {
+      background: #617a76;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 0, 100, 0.2);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #ff0055;
+      color: white;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff3380;
+    }
+
+    #response {
+      margin-top: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #d0d0d0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2 id="question">Loading question...</h2>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+    <p id="response"></p>
+  </div>
+
+  <script>
+    const qaList = [/* Your 28-day block from earlier goes here */];
+
+    function getQuestionIndex() {
+      const startDate = new Date('2025-06-19'); // Your custom cycle start
+      const today = new Date();
+      const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+      return diffDays % qaList.length;
+    }
+
+    const index = getQuestionIndex();
+    const currentQA = qaList[index];
+
+    document.getElementById('question').textContent = currentQA.question;
+
+    document.getElementById('yesBtn').onclick = () => {
+      document.getElementById('response').textContent = currentQA.yesResponse;
+    };
+
+    document.getElementById('noBtn').onclick = () => {
+      document.getElementById('response').textContent = currentQA.noResponse;
+    };
+  </script>
+
+</body>
+</html>
