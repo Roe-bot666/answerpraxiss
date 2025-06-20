@@ -1,6 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
   <title>Daily Yes/No Question</title>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     @keyframes slideInLeft {
       from { transform: translateX(-100%); opacity: 0; }
@@ -27,7 +34,7 @@
       background: #000000;
       padding: 30px;
       border-radius: 12px;
-      max-width: 500px;
+      max-width: 600px;
       text-align: center;
       box-shadow: 0 0 30px rgba(255, 0, 100, 0.2);
     }
@@ -50,120 +57,4 @@
     }
 
     button:hover {
-      background-color: #ff3380;
-      color: white;
-    }
-
-    .response {
-      margin-top: 30px;
-      font-size: 3rem;
-      font-weight: 600;
-      display: none;
-    }
-
-   #yesResponse {
-  font-family: 'Quicksand', sans-serif;
-  color: #0090ff;
-    }
-
-    #noResponse {
-  font-family: 'Creepster', cursive;
-  color: #00c851;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .show {
-      display: block;
-    }
-
-    .animate-yes {
-      animation: slideInLeft 0.5s ease forwards;
-    }
-
-    .animate-no {
-      animation: slideInRight 0.5s ease forwards;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <h2 id="question">Loading question...</h2>
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
-    <p id="yesResponse" class="response hidden"></p>
-    <p id="noResponse" class="response hidden"></p>
-  </div>
-
-  <script>
-   const qaList = [
-  { question: "Whats up bitch it's Monday did we do the thing?", yesResponse: "You moved. You resisted entropy. Even the grave applauds. Every second you fought gravity today buys you time before it drags you under for good.", noResponse: "You skipped again? Beta, your fascia is stiffer than your resolve. Keep this up and you’ll need a crowbar to unglue your ass from that chair." },
-  { question: "Day 2 tuesday did we do the thing?", yesResponse: "You resisted resistance. That’s rare. Now let’s see if you can resist the fridge after 9 p.m. too — or is that asking too much genius?", noResponse: "Your mat waited. Your mat wept. Your mat wonders why you bought it if you’re just decorating the floor." },
-  { question: "Well, well, well its Wednesday. We did the thing right?", yesResponse: "That 30 minutes you conquered today? That’s 10 years your joints will thank you for. That’s 10 years you don’t have to curse your past self. Respect.", noResponse: "You avoided discomfort. Pathetic. Don’t worry — your spine will find a way to make you uncomfortable later. That’s math." },
-  { question: "Thursday we thinging?", yesResponse: "You didn’t flake. You didn’t hide. That’s the rep that matters — the one that builds more than muscle.", noResponse: "Flaked again? What’s next, skipping hydration? Skipping sleep? Maybe just skip life and get it over with." },
-  { question: "FriYay we did it?", yesResponse: "Discipline isn’t sexy. It’s just rare. And today you chose rare. You chose what most people won’t. Remember that next time your brain tells you to quit.", noResponse: "Your sneakers grew dust waiting for you. Even the cockroaches are judging your lack of hustle." },
-  { question: "Ok so its Saturday, are we doing the thing?", yesResponse: "You kept your promise to your future self. They’re clapping for you right now across time. Keep showing up, or let them down — your choice.", noResponse: "Lazy glutes = sad jeans. Keep dodging those squats and soon no pair of pants will want to work with you." },
-  { question: "Sunday funday cause we did the thing right?", yesResponse: "You gave 30 minutes today. That’s 30 more than zero. And zero is what most people give. Build on it.", noResponse: "Zero effort, zero progress. You can’t outwit math. You want results? Put in the damn reps." },
-  { question: "Whats up bitch it's Monday did we do the thing?", yesResponse: "You could have made excuses. You didn’t. That makes you dangerous — to your weakness.", noResponse: "Skipped? Again? Let’s hope your funeral playlist slaps since you’re speeding toward needing one." },
-  { question: "Day 2 tuesday did we do the thing?", yesResponse: "You didn’t negotiate with laziness. You executed. Be proud. Now shut up and do it again tomorrow.", noResponse: "The only thing you trained today was your ability to dodge responsibility." },
-  { question: "Well, well, well its Wednesday. We did the thing right?", yesResponse: "Your glutes activated. Your spine celebrated. Your future mobility just got a gift.", noResponse: "Keep skipping and the only thing you’ll tone is regret." },
-  { question: "Thursday we thinging?", yesResponse: "Today you showed up. That’s 100% more than yesterday’s zeroes.", noResponse: "Skipped again? Just tattoo QUITTER on your forehead and call it a day." },
-  { question: "FriYay we did it?", yesResponse: "Movement = medicine. You just dosed up. Nice.", noResponse: "Your joints are screaming for help and you’re too busy scrolling memes." },
-  { question: "Ok so its Saturday, are we doing the thing?", yesResponse: "You trained today. That’s 10% biceps, 90% brain. Stay sharp.", noResponse: "You dodged the mat again? No surprise. Commitment dodged you too." },
-  { question: "Sunday funday cause we did the thing right?", yesResponse: "Every rep today was a middle finger to decay. Keep flipping it off.", noResponse: "No sweat, no gain. But hey, at least you’re consistent — consistently skipping." },
-  { question: "Whats up bitch it's Monday did we do the thing?", yesResponse: "You showed up. That’s the difference between a fantasy and a plan.", noResponse: "Skipping again? Weak habits, weak future." },
-  { question: "Day 2 tuesday did we do the thing?", yesResponse: "Your mat loves you again. Keep the affair going.", noResponse: "The only thing you flexed today was your excuse muscle." },
-  { question: "Well, well, well its Wednesday. We did the thing right?", yesResponse: "Discipline is built. You added bricks today. Nice.", noResponse: "Skipped again? I’d say I’m shocked, but we both know better." },
-  { question: "Thursday we thinging?", yesResponse: "You got uncomfortable on purpose. That’s where growth lives.", noResponse: "Every skipped day is a donation to Team Diabetes." },
-  { question: "FriYay we did it?", yesResponse: "You kept the promise. I see you.", noResponse: "Skipped? The mat deserves better. So do you." },
-  { question: "Ok so its Saturday, are we doing the thing?", yesResponse: "You honored the work today. Don’t let the streak die.", noResponse: "Skipping? Let me guess — too tired from… what, exactly?" },
-  { question: "Sunday funday cause we did the thing right?", yesResponse: "You chose reps over regret. Good trade.", noResponse: "The couch won today. Again." },
-  { question: "Whats up bitch it's Monday did we do the thing?", yesResponse: "Your glutes thank you. Your posture thanks you. Your mirror will too.", noResponse: "Another day, another excuse. Weak." },
-  { question: "Day 2 tuesday did we do the thing?", yesResponse: "You stayed loyal to your future self. Gold star.", noResponse: "Skipped. Classic. Just let the dust on your mat pile up — save me the suspense." },
-  { question: "Well, well, well its Wednesday. We did the thing right?", yesResponse: "You stacked one more brick. Wall of discipline growing.", noResponse: "Your spine sends its condolences for your lack of effort." },
-  { question: "Thursday we thinging?", yesResponse: "You fought for it today. Bet you fight again tomorrow.", noResponse: "Skipped again. Even your reflection looks disappointed." },
-  { question: "FriYay we did it?", yesResponse: "You outlasted the inner quitter. Keep smothering it.", noResponse: "Skipped. This is how soft habits harden." },
-  { question: "Ok so its Saturday, are we doing the thing?", yesResponse: "You moved today. Your blood thanked you. Your lungs thanked you. Your mattress waits patiently.", noResponse: "The mat misses you. The couch is plotting against you." },
-  { question: "Sunday funday cause we did the thing right?", yesResponse: "28 days. You didn’t just wish. You worked. Legend.", noResponse: "Skipped the final day? Wow. You were so close to not being a cautionary tale." }
-];
-
-    function getQuestionIndex() {
-      const startDate = new Date('2025-06-19');
-      const today = new Date();
-      const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-      return diffDays % qaList.length;
-    }
-
-    const index = getQuestionIndex();
-    const currentQA = qaList[index];
-    const yesEl = document.getElementById('yesResponse');
-    const noEl = document.getElementById('noResponse');
-
-    document.getElementById('question').textContent = currentQA.question;
-
-    document.getElementById('yesBtn').onclick = () => {
-      yesEl.textContent = currentQA.yesResponse;
-      yesEl.classList.remove('show', 'animate-yes');
-      void yesEl.offsetWidth;
-      yesEl.classList.remove('hidden');
-      yesEl.classList.add('show', 'animate-yes');
-      noEl.classList.remove('show');
-      noEl.classList.add('hidden');
-    };
-
-    document.getElementById('noBtn').onclick = () => {
-      noEl.textContent = currentQA.noResponse;
-      noEl.classList.remove('show', 'animate-no');
-      void noEl.offsetWidth;
-      noEl.classList.remove('hidden');
-      noEl.classList.add('show', 'animate-no');
-      yesEl.classList.remove('show');
-      yesEl.classList.add('hidden');
-    };
-  </script>
-
-</body>
-</html>
+      background-color
